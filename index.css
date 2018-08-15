@@ -1,0 +1,19 @@
+body{
+	background-color: #232323;
+}
+
+nav{
+	background-color: #dddddd;
+}
+
+#container{
+	max-width: 650px;
+	margin: 0 auto;
+} 
+
+.colorBox{
+	width: 30%;
+	float: left;
+	margin: 1.66%;
+	padding-bottom: 30%;
+}
