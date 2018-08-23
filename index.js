@@ -1,9 +1,4 @@
-var colors = ["rgb(255, 0, 0)",
-			"rgb(255, 255, 0)",
-			"rgb(0, 255, 0)",
-			"rgb(0, 255, 255)",
-			"rgb(0, 0, 255)",
-			"rgb(255, 0, 255)"];
+var colors = generateRandomColors(6);
 
 var messageDisplay = document.querySelector("#message");
 
@@ -11,6 +6,7 @@ var colorBoxes = document.querySelectorAll(".colorBox");
 
 var pickedColor = randomColor();
 var pickedColorDisplay = document.querySelector("#pickedColor");
+var nav = document.querySelector("nav");
 pickedColorDisplay.textContent = pickedColor;
 
 for (var i = 0; i < colorBoxes.length; i++) {
@@ -25,6 +21,7 @@ for (var i = 0; i < colorBoxes.length; i++) {
 		if(clickedColor === pickedColor){
 			messageDisplay.textContent = "Correct!";
 			changeColors(pickedColor);
+			nav.style.backgroundColor = pickedColor;
 
 		}
 		else{
@@ -45,3 +42,31 @@ function randomColor(){
 	var randomNumber = Math.floor(Math.random() * colors.length);
 	return colors[randomNumber];
 }
+
+function generateRandomColors(num){
+	var arr = [];
+	for (var i = 0; i < num; i++) {
+		//get random color
+		arr.push(randomColorGenerator());
+	}
+	return arr;
+}
+
+function randomColorGenerator(){
+	//pick a red value
+	var redValue = Math.floor(Math.random() * 256);
+	//pick green value
+	var greenValue = Math.floor(Math.random() * 256);
+	//pick blue value
+	var blueValue = Math.floor(Math.random() * 256);
+
+	return "rgb(" + redValue + ", " + greenValue + ", " + blueValue + ")";
+}
+
+
+
+
+
+
+
+
