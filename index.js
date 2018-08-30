@@ -4,8 +4,7 @@ var colors = generateRandomColors(numberOfBoxes);
 var messageDisplay = document.querySelector("#message");
 var colorBoxes = document.querySelectorAll(".colorBox");
 var resetButton = document.querySelector("#reset");
-var easyButton = document.querySelector("#easyButton");
-var hardButton = document.querySelector("#hardButton");
+var difficultyButtons = document.querySelectorAll(".difficultyButton");
 var pickedColor = randomColor();
 var pickedColorDisplay = document.querySelector("#pickedColor");
 var nav = document.querySelector("nav");
@@ -14,6 +13,25 @@ pickedColorDisplay.textContent = pickedColor;
 
 //NEW COLORS & PLAY AGAIN BUTTON
 resetButton.addEventListener("click", function(){
+	reset();
+});
+
+
+//DIFFICULTY BUTTONS
+for (var i = 0; i < difficultyButtons.length; i++) {
+	difficultyButtons[i].addEventListener("click", function(){
+		difficultyButtons[0].classList.remove("selected");
+		difficultyButtons[1].classList.remove("selected");
+		this.classList.add("selected");
+		this.textContent == "Easy" ? numberOfBoxes = 3 : numberOfBoxes = 6;
+		reset();
+
+	});
+}
+
+
+//RESET
+function reset(){
 	colors = generateRandomColors(numberOfBoxes);
 
 	pickedColor = randomColor();
@@ -24,47 +42,21 @@ resetButton.addEventListener("click", function(){
 
 	messageDisplay.textContent = "";
 
-	this.textContent = "New Colors";
-	for(var i = 0; i < colorBoxes.length; i++){
-		colorBoxes[i].style.backgroundColor = colors[i];
-	}
-});
+	resetButton.textContent = "New Colors";
 
-
-//DIFFICULTY BUTTONS
-easyButton.addEventListener("click", function(){
-	numberOfBoxes = 3;
-	easyButton.classList.add("selected");
-	hardButton.classList.remove("selected");
-	colors = generateRandomColors(numberOfBoxes);
-	pickedColor = randomColor();
-	pickedColorDisplay.textContent = pickedColor;
 	for(var i = 0; i < colorBoxes.length; i++){
-		if(colors[i]){
+		colorBoxes[i].style.display = "block";
+		if (colors[i]) {
 			colorBoxes[i].style.backgroundColor = colors[i];
 		}
 		else{
-			colorBoxes[i].style.display = "none";
+			colorBoxes[i].style.display = "none";	
 		}
 	}
-});
-
-hardButton.addEventListener("click", function(){
-	numberOfBoxes = 6;
-	hardButton.classList.add("selected");
-	easyButton.classList.remove("selected");
-	colors = generateRandomColors(numberOfBoxes);
-	pickedColor = randomColor();
-	pickedColorDisplay.textContent = pickedColor;
-	for(var i = 0; i < colorBoxes.length; i++){
-		if(colors[i]){
-			colorBoxes[i].style.backgroundColor = colors[i];
-			colorBoxes[i].style.display = "block";
-	}
-}});
+}
 
 
-//
+//GAMEPLAY LOGIC
 for (var i = 0; i < colorBoxes.length; i++) {
 	//add initial colors
 	colorBoxes[i].style.backgroundColor = colors[i];
@@ -88,6 +80,7 @@ for (var i = 0; i < colorBoxes.length; i++) {
 	});
 
 }
+
 
 function changeColors(color){
 	for(var i = 0; i < colorBoxes.length; i++){
