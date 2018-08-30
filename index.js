@@ -20,8 +20,11 @@ resetButton.addEventListener("click", function(){
 
 	pickedColorDisplay.textContent = pickedColor;
 
-	nav.style.backgroundColor = "#dddddd";
+	nav.style.backgroundColor = "steelblue";
 
+	messageDisplay.textContent = "";
+
+	this.textContent = "New Colors";
 	for(var i = 0; i < colorBoxes.length; i++){
 		colorBoxes[i].style.backgroundColor = colors[i];
 	}
